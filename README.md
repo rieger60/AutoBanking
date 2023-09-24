@@ -61,7 +61,10 @@ The goal of this project is to create an automated system that efficiently organ
 - Troubleshooting guidance should be provided.
 
 ### Compatibility
-- The system should be compatible with [list compatible operating systems and Excel versions].
+- The system is compatible with Windows 10 and Windows 11 operating systems.
+- It is designed to run smoothly on these Windows versions.
+- Data preparation and transformation tasks are exclusively performed in Python.
+- While data processing tasks may involve Excel, Python serves as the primary language for data preparation.
 
 ### Scalability
 - The system should be designed to handle a growing volume of bank statements in CSV, PDF, and XML formats efficiently.
