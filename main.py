@@ -26,6 +26,14 @@ def process_and_export_data(transactions):
     # Implement this function to perform data processing or export data to Excel
     pass
 
+# Function to find and handle uncategorized transactions:
+# - Identify transactions that were not categorized.
+# - Update the original description to match a categorized text if possible.
+# - Create a new category for uncategorized transactions if necessary.
+def find_uncategorized_transactions(transactions, categorized_transactions):
+    # Implement this function to handle uncategorized transactions
+    pass
+
 # Main function
 def main():
     # Specify the path to the statement file (CSV, PDF, or XML)
@@ -47,6 +55,9 @@ def main():
     
     # Categorize transactions
     categorized_transactions = categorize_transactions(transactions, categorization_rules)
+
+    # Find and collect uncategorized transactions
+    uncategorized_transactions = find_uncategorized_transactions(transactions, categorized_transactions)
     
     # Perform further data processing or export the data to Excel
     process_and_export_data(categorized_transactions)
