@@ -79,9 +79,43 @@ def extract_pdf_data(file_path, bank):
     # Implement this function to extract data from a PDF file using Tabula
     pass
 
-def extract_xml_data(file_path, bank):
-    # Implement this function to extract data from a PDF file using Tabula
-    pass
+import pandas as pd
+
+def extract_xlsx_data(file_path, bank):
+    try:
+        if bank == 'Norwegian':
+            # Specific settings for Bank Norwegian
+            # Modify this section as per Bank Norwegian's format
+            
+            # Read the XLSX file into a pandas DataFrame with specific settings
+            df = pd.read_excel(file_path, usecols=['TransactionDate', 'Text', 'Type', 'Amount'])
+            
+            # Rename columns for consistency and readability
+            df = df.rename(columns={'TransactionDate': 'Date', 'Text': 'Description',
+                                    'Amount': 'Amount', 'Type': 'Type'})
+
+            # Data manipulation and formatting as needed for Bank Norwegian's XLSX format
+            # You can add specific data manipulation steps here
+
+            # Convert the DataFrame to a list of dictionaries
+            transactions = df.to_dict(orient='records')
+
+        elif bank == 'Other Bank':
+            # Specific settings for another bank (add more banks as needed)
+            # Modify this section as per the other bank's format
+            pass
+        else:
+            raise ValueError("Unsupported bank")
+
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        transactions = []
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        transactions = []
+
+    return transactions
+
 
 # Function to categorize transactions based on rules
 def categorize_transactions(transactions, rules):
@@ -104,16 +138,16 @@ def find_uncategorized_transactions(transactions, categorized_transactions):
 # Main function
 def main():
     # Specify the path to the statement file (CSV, PDF, or XML)
-    file_path = 'sample.csv'  # Update with your file path
-    bank = 'Wise'
+    file_path = 'C:/Users/smrie/Downloads/Statement (2).xlsx'  # Update with your file path
+    bank = 'Norwegian'
     
     # Extract data from the statement file based on its format
     if file_path.endswith('.csv'):
         transactions = extract_csv_data(file_path, bank)
     elif file_path.endswith('.pdf'):
         transactions = extract_pdf_data(file_path, bank)
-    elif file_path.endswith('.xml'):
-        transactions = extract_xml_data(file_path, bank)
+    elif file_path.endswith('.xlsx'):
+        transactions = extract_xlsx_data(file_path, bank)
     else:
         raise ValueError("Unsupported file format")
 
